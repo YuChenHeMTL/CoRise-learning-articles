@@ -1,0 +1,13 @@
+{
+    "Type": "MCQ",
+    "Object": {
+        "Question": "What color is the sky?",
+        "CorrectOption": "Blue",
+        "IncorrectOptions": [
+            "Red",
+            "Green",
+            "Yellow"
+        ],
+        "FeedbackOnIncorrect": "Please refer back to instructions in week 1 section 2 to read more about this again."
+    }
+}
