@@ -2,6 +2,8 @@
 
 This is an interactive articles collection made for CoRise. It is built with Next.js and React.js, and a multitude of third-party libraries.
 
+You can visit the website [here](https://co-rise-learning-articles.vercel.app/).
+
 ## Getting Started
 
 First, install the dependencies:
@@ -123,6 +125,11 @@ One of my most wanted features to make is a dark mode button so that the reader 
 Example of dark mode:
 ![Dark Mode](./public/dark_mode.png)
 
+### CI/CD
+This project is deployed with [Vercel](https://vercel.com/), and it is integrated with GitHub so that whenever a new commit is pushed to the `main` branch, it will automatically deploy the new version of the website. 
+
+You can visit the website at [https://co-rise-learning-articles.vercel.app/](https://co-rise-learning-articles.vercel.app/).
+
 ## Design decisions
 
 ### Why Next.js?
@@ -164,4 +171,4 @@ This project is probably one of the most interesting challenges that I tackled f
 - add more features to the blocks (Edit/Create, Delete, etc.)
 - add more user stats
 
-On the engineering side, due to the time constraint, I couldn't implement the entire SDLC workflow, so I omitted the unit and integration tests in this project, but I would like to add them in the future. I would also like to add a CI/CD pipeline to automate the deployment process when this project is ready to be deployed.
+On the engineering side, due to the time constraint, I couldn't implement the entire SDLC workflow, so I omitted the unit and integration tests in this project, but I would like to add them in the future. 
