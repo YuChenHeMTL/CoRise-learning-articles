@@ -1,4 +1,4 @@
-// import '@/styles/globals.css'
+"use client"
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/utils.module.css'
