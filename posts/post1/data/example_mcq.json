@@ -1,0 +1,13 @@
+{
+    "Type": "MCQ",
+    "Object": {
+        "Question": "What is the answer to life, the universe, and everything?",
+        "CorrectOption": 42,
+        "IncorrectOptions": [
+            "24",
+            "0",
+            "1"
+        ],
+        "FeedbackOnIncorrect": "Incorrect. Please try again."
+    }
+}

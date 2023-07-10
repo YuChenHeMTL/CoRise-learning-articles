@@ -1,7 +1,7 @@
 {
-    "Title": "Second Post",
-    "Date": "2019-01-01",
+    "Title": "Only 2 MCQs",
+    "Date": "2018-01-01",
     "Blocks": [
-        "mcq.json"
+        "mcq.json","mcq.json"
     ]
 }

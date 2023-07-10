@@ -1,16 +1,17 @@
 import fs from 'fs'
 import path from 'path'
-import { MCQ, getMultipleChoice } from './types/mcq'
-import { Content, PostData, PostType } from './types';
-import { remark } from 'remark';
-import html from 'remark-html'
+import { preprocessBlock } from './preprocess';
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
-export function getPostDirectories() {
+export function getPostDirectoryIds() {
     return fs.readdirSync(postsDirectory, { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name)
+}
+
+export function getPostDirectories() {
+    return getPostDirectoryIds()
     .map(name => {
         return {
             params: {
@@ -19,44 +20,30 @@ export function getPostDirectories() {
         }});
 }
 
-export function getFullPostData() {
-    const directories = fs.readdirSync(postsDirectory, { withFileTypes: true })
-    .filter(dirent => dirent.isDirectory())
-    .map(dirent => dirent.name)
-    const settings = directories.map(directory => {
-        const filePath = path.join(postsDirectory, directory, "settings.json")
-        const fileContents = fs.readFileSync(filePath, 'utf8')
-        const settings = JSON.parse(fileContents)
+export async function getAllPostData() {
+    const allPostData =  await Promise.all(getPostDirectoryIds().map(async id => {
+        const content =  await getPostDataById(id)
         return {
-            "id": directory,
-            "contentHtml": settings
+            id: id,
+            content: content
+        }
+    }));
+    return allPostData.sort((a, b) => {
+        if (a.content.date < b.content.date) {
+            return 1
+        } else {
+            return -1
         }
     })
-    return settings
 }
 
-export async function getPostDataJson(id: string) {
-    // const filePath = path.join(postsDirectory, id, "settings.json")
+export async function getPostDataById(id: string) {
     const filePath = postsDirectory + "/" + id + "/" + "settings.json"
     const settingsContent = fs.readFileSync(filePath, 'utf8')
     const settings = JSON.parse(settingsContent)
     const blocks: string[] = settings["Blocks"]
 
-    const blockContents: Object = await Promise.all(blocks.map( async block => {
-        // const filePath = path.join(postsDirectory, id, block)
-        const filePath = postsDirectory + "/" + id + "/data/" + block
-        const fileContents = fs.readFileSync(filePath, 'utf8')
-        const content = JSON.parse(fileContents)
-        if (content.Type == PostType.Markdown) {
-            const processedContent = await remark()
-            .use(html)
-            .process(content.Object.Text)
-            content.Object.Text = processedContent.toString()
-        }
-        return content
-        
-    }))
-    // const blockContents2 = await Promise.all(blockContents)
+    const blockContents = await getBlockContent(id, blocks)
 
     return {
         title: settings["Title"],
@@ -65,3 +52,12 @@ export async function getPostDataJson(id: string) {
     }
 }
 
+export async function getBlockContent(id: string, blockPaths: string[]) {
+    return await Promise.all(blockPaths.map( async block => {
+        const filePath = postsDirectory + "/" + id + "/data/" + block
+        const fileContents = fs.readFileSync(filePath, 'utf8')
+        const content = JSON.parse(fileContents)
+        return await preprocessBlock(content);
+    }
+    ));
+}

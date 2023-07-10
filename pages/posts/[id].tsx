@@ -1,19 +1,23 @@
-import parseContent from "@/lib/parser";
-import { getPostDataJson, getPostDirectories } from "@/lib/posts"
-import { PostData } from "@/lib/types";
-import { MCQ, getMultipleChoice } from "@/lib/types/mcq";
+import { parsePostData } from "@/lib/parser";
+import { getPostDataById, getPostDirectories } from "@/lib/posts"
+import { Content, PostData } from "@/lib/types";
 import type { InferGetStaticPropsType, GetStaticProps } from 'next'
+import utilStyles from '@/styles/utils.module.css'
+import Layout from "@/components/layout";
 
-type Param = {
-    id: string;
-}
+import 'katex/dist/katex.min.css'
 
-export default function Post({ html }: InferGetStaticPropsType<typeof getStaticProps> & { html: Object }) {
+export default function Post({ postContent }: InferGetStaticPropsType<typeof getStaticProps> & { postContent: Content }) {
     return (
-        // <div
-        //     dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
-        // />
-        <div>{parseContent(html as PostData)}</div>
+        <Layout>
+            <article>
+                <h1 className={utilStyles.headingXl}>{postContent.title}</h1>
+                <div className={utilStyles.lightText}>
+                    {postContent.date}
+                </div>
+                {parsePostData(postContent.contentHtml as PostData[])}
+            </article>
+        </Layout>
     )
 }
 
@@ -26,12 +30,12 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps: GetStaticProps<{
-    html: Object
+    postContent: Content
   }> = async (params: any) => {
-    const postData = await getPostDataJson(params["params"]["id"])
+    const postData = await getPostDataById(params["params"]["id"])
     return {
         props: {
-            html: postData.contentHtml[0]
+            postContent: postData
         }
     }
 }

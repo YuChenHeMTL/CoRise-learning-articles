@@ -1,16 +1,14 @@
-import { remark } from 'remark'
-import html from 'remark-html'
-
-export type Markdown = {
-    Text: string
-}
+import BlockLayout from '@/components/blockLayout'
+import { Markdown } from '../types'
 
 export default function getMarkdown(data: Object) {
     let content = data as Markdown
 
     return (
-        <div
-            dangerouslySetInnerHTML={{ __html: content.Text }}
-        />
+        <BlockLayout>
+            <div
+                dangerouslySetInnerHTML={{ __html: content.Text }}
+            />
+        </BlockLayout>
     )
 }

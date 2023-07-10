@@ -1,7 +1,7 @@
 {
-    "Title": "First Post",
+    "Title": "Mix of many blocks",
     "Date": "2019-01-01",
     "Blocks": [
-        "markdown.json"
+        "markdown.json", "example_mcq.json", "sandbox.json"
     ]
 }

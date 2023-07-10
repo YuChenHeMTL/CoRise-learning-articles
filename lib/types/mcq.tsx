@@ -1,30 +1,11 @@
-import { Card, Radio, Button, Text } from "@nextui-org/react";
 import { useState } from "react";
-
-export type MCQ = {
-    Question: string;
-    CorrectOption: string;
-    IncorrectOptions: string[];
-    FeedbackOnIncorrect: string;
-}
-
-function shuffle(array: any[]) {
-    let currentIndex = array.length,  randomIndex;
-  
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-  
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-  
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
-    }
-  
-    return array;
-  }
+import utilstyles from '@/styles/utils.module.css'
+import { MCQ } from "../types";
+import FormControl from "@mui/material/FormControl";
+import { FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
+import { BsClipboardCheck } from "react-icons/bs";
+import React from 'react';
+import BlockLayout from "@/components/blockLayout";
 
 export function getMultipleChoice( data: Object ) {
     let content = data as MCQ
@@ -37,46 +18,47 @@ export function getMultipleChoice( data: Object ) {
         setShowResults(value != content.CorrectOption)
     }
 
-    let options = [...content.IncorrectOptions, content.CorrectOption]
-    console.log(options)
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setValue((event.target as HTMLInputElement).value);
+    };
+
+    let options = content.IncorrectOptions
 
     return (
-        <Card style={{ width: '18rem' }}>
-            <Card.Body>
-                <Card.Header>
-                    <Text b>{content.Question}</Text>
-                </Card.Header>
-                <Radio.Group 
-                    label="Options"
-                    onChange={setValue}
-                    // validationState={value === content.CorrectOption ? 'valid' : 'invalid'}
-                    >
-                    {options.map((option) => (
-                        <Radio
-                            value={option}
-                            key={option}
-                        >{option}</Radio>
-                    ))}
-                    <br />
-                    <Button variant="primary" type="button" onPress={handleSubmit}>
-                        Submit
-                    </Button>
-                </Radio.Group>
-                {
-                    showFooter? (
-                        showResults ? (
-                            <Card.Footer>
-                                <Text b>{content.FeedbackOnIncorrect}</Text>
-                            </Card.Footer>
-                        ) : (
-                            <Card.Footer>
-                                <Text b>You got it! </Text>
-                            </Card.Footer>
-                        )
-                    ) : null
-
-                }
-            </Card.Body>
-        </Card>
+        <BlockLayout>
+            <form className={utilstyles.mcq}>
+                <div className={utilstyles.title}>
+                    <BsClipboardCheck /> Quick Quiz 
+                </div>
+                <div className={utilstyles.question}>
+                    {content.Question}
+                </div>
+                {options.map((option) => (
+                    <div className="radio" key={option}>
+                        <label>
+                            <input type="radio" className={utilstyles.input} value={option} onChange={handleChange} checked={value == option}/>
+                            {option}
+                        </label>
+                    </div>
+                ))}
+                <button type="button" className={utilstyles.submit} onClick={handleSubmit}>
+                    Submit
+                </button>
+                <div className={utilstyles.result}>
+                    {
+                        showFooter? (
+                            showResults ? (
+                                <div>
+                                    {content.FeedbackOnIncorrect}
+                                </div>
+                            ) : (
+                                "You got it!"
+                            )
+                        ) : null
+                    }
+                </div>
+            </form>
+        </BlockLayout>
+        
     )
 }

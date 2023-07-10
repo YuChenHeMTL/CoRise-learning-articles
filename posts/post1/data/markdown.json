@@ -1,6 +1,6 @@
 {
     "Type": "Markdown",
     "Object": {
-        "Text": "## Heading 2\nThis is a markdown text with some `highlighted text`."
+        "Text": "## Heading 2\nThis is a markdown text with some `highlighted text`. \n\n Sample math equation: $\\frac{1}{2}$"
     }
-}
+} 
