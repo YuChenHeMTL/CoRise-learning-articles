@@ -1,13 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import utilstyles from '@/styles/utils.module.css'
 import { MCQ } from "../types";
 import FormControl from "@mui/material/FormControl";
 import { FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import { BsClipboardCheck } from "react-icons/bs";
-import React from 'react';
 import BlockLayout from "@/components/blockLayout";
 
-export function getMultipleChoice( data: Object ) {
+export default function MultipleChoice( data: Object ) {
     let content = data as MCQ
     const [value, setValue] = useState('');
     const [showResults, setShowResults] = useState(false);

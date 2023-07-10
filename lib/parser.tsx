@@ -1,16 +1,16 @@
-import { getMultipleChoice } from "./types/mcq";
-import getMarkdown from "./types/markdown";
+import MultipleChoice from "./types/mcq";
+import Markdown from "./types/markdown";
 import { PostData, PostType } from "./types";
-import getSandbox from "./types/sandbox";
+import Sandbox from "./types/sandbox";
 
 export function parseContent(data: PostData) {
     switch (data.Type) {
         case PostType.MCQ:
-            return getMultipleChoice(data.Object)
+            return MultipleChoice(data.Object)
         case PostType.Markdown:
-            return getMarkdown(data.Object)
+            return Markdown(data.Object)
         case PostType.Sandbox:
-            return getSandbox(data.Object)
+            return Sandbox(data.Object)
         default:
             return "test"
     }

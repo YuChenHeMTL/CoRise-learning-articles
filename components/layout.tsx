@@ -6,6 +6,7 @@ import React from 'react'
 import { formatSeconds } from './date'
 import DarkMode from './darkModeButton'
 import TimeTracker from './timeTracker'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -37,7 +38,7 @@ export default function Layout({
       {!home && (
         <div className={styles.backToHome}>
           <TimeTracker />
-          <a href="/">← Back to home</a>
+          <Link href="/">← Back to home</Link>
         </div>
       )}
     </div>

@@ -1,7 +1,7 @@
 import BlockLayout from '@/components/blockLayout'
 import { Markdown } from '../types'
 
-export default function getMarkdown(data: Object) {
+export default function Markdown(data: Object) {
     let content = data as Markdown
 
     // only returning a div with the markdown content

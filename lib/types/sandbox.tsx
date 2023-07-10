@@ -1,6 +1,6 @@
 import { Sandbox } from "../types";
 
-export default function getSandbox(data: Object) {
+export default function Sandbox(data: Object) {
     let content = data as Sandbox
 
     // returning an iframe with the sandbox url
