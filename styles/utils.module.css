@@ -87,6 +87,10 @@
     max-width: 50rem;
     /* padding: 0 1rem; */
     margin: 3rem auto 6rem;
+
+    /* .toggleDark {
+        text-align: right;
+    } */
 }
 
 .header {
@@ -106,10 +110,4 @@
     width: auto;
     object-fit: contain;
     margin-right: 1rem;
-}
-
-.toggleDark {
-    /* text-align: right; */
-    position: absolute;
-    right: 20%;
 }

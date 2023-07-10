@@ -20,7 +20,6 @@
     "date-fns": "^2.30.0",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
-    "md-block": "^0.0.1",
     "next": "13.4.9",
     "react": "18.2.0",
     "react-bootstrap": "^2.8.0",
@@ -30,13 +29,10 @@
     "rehype-katex": "^6.0.3",
     "rehype-stringify": "^9.0.3",
     "remark": "^14.0.3",
-    "remark-code-blocks": "^2.0.1",
-    "remark-codesandbox": "^0.10.1",
     "remark-html": "^15.0.2",
     "remark-math": "^5.1.1",
     "remark-parse": "^10.0.2",
     "remark-rehype": "^10.1.0",
-    "typescript": "5.1.6",
-    "unified": "^10.1.2"
+    "typescript": "5.1.6"
   }
 }

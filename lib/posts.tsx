@@ -10,6 +10,10 @@ export function getPostDirectoryIds() {
     .map(dirent => dirent.name)
 }
 
+/**
+ * Returns all post IDs
+ * @returns an array of objects with the format {params: {id: string}}
+ */
 export function getPostDirectories() {
     return getPostDirectoryIds()
     .map(name => {
@@ -20,6 +24,10 @@ export function getPostDirectories() {
         }});
 }
 
+/**
+ * Return all actual post data
+ * @returns an array of objects with the format {id: string, content: Content}
+ */
 export async function getAllPostData() {
     const allPostData =  await Promise.all(getPostDirectoryIds().map(async id => {
         const content =  await getPostDataById(id)
@@ -37,6 +45,11 @@ export async function getAllPostData() {
     })
 }
 
+/**
+ * 
+ * @param id the id of the post
+ * @returns the corresponding post data as a Content object
+ */
 export async function getPostDataById(id: string) {
     const filePath = postsDirectory + "/" + id + "/" + "settings.json"
     const settingsContent = fs.readFileSync(filePath, 'utf8')
@@ -52,6 +65,12 @@ export async function getPostDataById(id: string) {
     }
 }
 
+/**
+ * 
+ * @param id the id of the post
+ * @param blockPaths paths to the blocks
+ * @returns an array of PostData objects, which contains the preprocessed block data
+ */
 export async function getBlockContent(id: string, blockPaths: string[]) {
     return await Promise.all(blockPaths.map( async block => {
         const filePath = postsDirectory + "/" + id + "/data/" + block

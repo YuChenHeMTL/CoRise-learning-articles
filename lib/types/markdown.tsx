@@ -4,6 +4,7 @@ import { Markdown } from '../types'
 export default function getMarkdown(data: Object) {
     let content = data as Markdown
 
+    // only returning a div with the markdown content
     return (
         <BlockLayout>
             <div

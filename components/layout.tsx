@@ -1,11 +1,11 @@
-import '@/styles/globals.css'
+// import '@/styles/globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/utils.module.css'
-import { Navbar } from '@nextui-org/react'
-import Script from 'next/script'
 import React from 'react'
 import { formatSeconds } from './date'
+import DarkMode from './darkModeButton'
+import TimeTracker from './timeTracker'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,47 +20,6 @@ export default function Layout({
   children: React.ReactNode,
   home?: boolean
 }) {
-  const [timeSpent, setTimeSpent] = React.useState(0)
-  
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeSpent(timeSpent + 1)
-    }, 1000)
-    return () => clearInterval(interval)
-  }, [timeSpent])
-
-  const [isDark, setIsDark] = React.useState(false)
-  const [theme, setTheme] = React.useState('light');
-
-  React.useEffect(() => {
-    const dark = localStorage.getItem('dark')
-    if (dark) {
-      setIsDark(dark === 'true')
-    }
-  }, [])
-
-  React.useEffect(() => {
-    localStorage.setItem('dark', isDark.toString())
-  }, [isDark])
-
-  React.useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-  }, [isDark])
-
-
-  const toggleDark = () => {
-    if (theme === 'light') {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
-    setIsDark(!isDark)
-  }
-
   return (
     <div className={styles.container}>
       {home && (
@@ -73,13 +32,11 @@ export default function Layout({
           </h1>
         </div>
       )}
-      <button onClick={toggleDark} className={styles.toggleDark}>Dark Mode</button>
+      <DarkMode />
       {children}
       {!home && (
         <div className={styles.backToHome}>
-          <div>
-            <p>Time spent on this page: {formatSeconds(timeSpent)} </p>
-          </div>
+          <TimeTracker />
           <a href="/">← Back to home</a>
         </div>
       )}

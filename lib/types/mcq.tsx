@@ -46,7 +46,7 @@ export function getMultipleChoice( data: Object ) {
                 </button>
                 <div className={utilstyles.result}>
                     {
-                        showFooter? (
+                        (showFooter &&
                             showResults ? (
                                 <div>
                                     {content.FeedbackOnIncorrect}
@@ -54,7 +54,7 @@ export function getMultipleChoice( data: Object ) {
                             ) : (
                                 "You got it!"
                             )
-                        ) : null
+                        )
                     }
                 </div>
             </form>

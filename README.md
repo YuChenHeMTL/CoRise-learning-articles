@@ -1,10 +1,20 @@
 # CoRise-learning-articles
 
-This is an interactive articles collection made for CoRise. It is built with Next.js and React.js.
+This is an interactive articles collection made for CoRise. It is built with Next.js and React.js, and a multitude of third-party libraries.
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
+
+```bash
+npm install
+# or
+yarn
+# or
+pnpm install
+```
+
+Next, run the development server:
 
 ```bash
 npm run dev
@@ -107,6 +117,12 @@ Example:
 
 ![Time Spent](./public/time_spent.png)
 
+### Dark Mode
+One of my most wanted features to make is a dark mode button so that the reader can adapt their eyes to a different color scheme, so on the top of each page, there is a dark mode button that allows the user to switch between light mode and dark mode.
+
+Example of dark mode:
+![Dark Mode](./public/dark_mode.png)
+
 ## Design decisions
 
 ### Why Next.js?
@@ -135,3 +151,17 @@ For the block data, I chose to add a `settings.json` file in each article's fold
 I chose to implement a very simplistic view of the article because when I went through other articles website, I found that the simpler ones retained my attention and allowed me to focus on the content instead of the design. 
 
 As for the blocks, I implemented them as close as possible to the original mocks, and I also added some variations to make it more appealing.
+
+### Other Design Decisions
+When it comes to readability, one of the things that pains me when trying to read other people's code, or even my own code, is that I don't have the original context of the code, and I have to go through the code to understand what it does. Therefore, I tried to modularize my code as much as possible and add comments to make it easier for others and myself to understand the code.
+
+For example, I made individual components out of the dark mode button and the time tracker because I deemed it to be a separate entity from the article itself, and it could also be reused in other pages. 
+
+## Future Improvements
+This project is probably one of the most interesting challenges that I tackled for a take home assessment, or even a personal project as I can see myself using this project as well to make my own blog. On this note, there are a couple of things that I would like to improve on in the future:
+
+- expand the types of blocks
+- add more features to the blocks (Edit/Create, Delete, etc.)
+- add more user stats
+
+On the engineering side, due to the time constraint, I couldn't implement the entire SDLC workflow, so I omitted the unit and integration tests in this project, but I would like to add them in the future. I would also like to add a CI/CD pipeline to automate the deployment process when this project is ready to be deployed.

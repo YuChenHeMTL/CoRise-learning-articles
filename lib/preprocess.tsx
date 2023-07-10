@@ -6,7 +6,11 @@ import remarkRehype from 'remark-rehype'
 import rehypeKatex from 'rehype-katex'
 import rehypeStringify from 'rehype-stringify'
 
-
+/**
+ * Function to shuffle an array, used for MCQ choices.
+ * @param array an array of any type
+ * @returns a shuffled copy of the same array
+ */
 function shuffle(array: any[]) {
     let currentIndex = array.length,  randomIndex;
     while (currentIndex != 0) {
@@ -20,6 +24,11 @@ function shuffle(array: any[]) {
     return array;
 }
 
+/**
+ * Preprocesses the block data to make it ready for rendering. Currently supports all block types.
+ * @param data the block data
+ * @returns the preprocessed block data
+*/
 export async function preprocessBlock(data: PostData) {
     switch (data.Type) {
         case PostType.MCQ:
